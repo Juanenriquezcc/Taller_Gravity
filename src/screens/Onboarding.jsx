@@ -17,26 +17,26 @@ export default function Onboarding() {
         </div>
         <div className="flex items-center gap-2 mb-4 text-primary text-sm font-semibold uppercase tracking-[0.22em]">
           <Star size={14} className="fill-primary" />
-          Premium delivery
+          Entrega premium
         </div>
         <h1 className="text-headline-lg text-center mb-4 text-on-surface animate-fade-up">
-          Premium Food<br />at Your Doorstep
+          Comida premium<br />en tu puerta
         </h1>
         <p className="text-body-lg text-on-surface-variant text-center max-w-[280px] animate-fade-up" style={{ animationDelay: '0.08s' }}>
-          Discover the best gourmet meals from top restaurants, delivered fast.
+          Descubre platos gourmet de los mejores restaurantes, entregados con rapidez.
         </p>
         <div className="w-full mt-6 grid grid-cols-3 gap-3 max-w-sm animate-fade-up" style={{ animationDelay: '0.14s' }}>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
             <Truck size={18} className="mx-auto mb-2 text-primary" />
-            <span className="text-[11px] text-on-surface-variant">Fast</span>
+            <span className="text-[11px] text-on-surface-variant">Rápido</span>
           </div>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
             <ShieldCheck size={18} className="mx-auto mb-2 text-primary" />
-            <span className="text-[11px] text-on-surface-variant">Trusted</span>
+            <span className="text-[11px] text-on-surface-variant">Confiable</span>
           </div>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
             <Star size={18} className="mx-auto mb-2 text-primary fill-primary" />
-            <span className="text-[11px] text-on-surface-variant">Top rated</span>
+            <span className="text-[11px] text-on-surface-variant">Mejor valorado</span>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function Onboarding() {
           onClick={() => navigate('/home')}
           className="w-full bg-primary text-white py-4 rounded-full font-headline font-semibold text-lg flex items-center justify-center gap-2 shadow-[0_8px_16px_-4px_rgba(233,94,80,0.4)] transition-all active:scale-[0.98] hover:shadow-[0_12px_24px_-6px_rgba(233,94,80,0.48)]"
         >
-          Get Started
+          Empezar ahora
           <ArrowRight size={20} />
         </button>
       </div>

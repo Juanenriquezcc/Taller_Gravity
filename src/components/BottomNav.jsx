@@ -8,9 +8,9 @@ export default function BottomNav() {
   const { cartCount } = useCart();
 
   const navItems = [
-    { path: '/home', icon: Home, label: 'Home' },
-    { path: '/cart', icon: ShoppingBag, label: 'Cart', badge: cartCount },
-    { path: '/profile', icon: User, label: 'Profile' },
+    { path: '/home', icon: Home, label: 'Inicio' },
+    { path: '/cart', icon: ShoppingBag, label: 'Carrito', badge: cartCount },
+    { path: '/profile', icon: User, label: 'Perfil' },
   ];
 
   if (location.pathname === '/' || location.pathname.startsWith('/product/')) return null;

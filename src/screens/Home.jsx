@@ -31,11 +31,11 @@ export default function Home() {
     });
   }, [searchQuery, selectedCategory]);
 
-  const allCategories = [{ id: 'all', name: 'All' }, ...categories];
+  const allCategories = [{ id: 'all', name: 'Todos' }, ...categories];
   const quickHighlights = [
-    { icon: Truck, title: 'Fast delivery', description: 'Average arrival in under 30 min' },
-    { icon: ShieldCheck, title: 'Trusted kitchens', description: 'Rated 4.6+ by real customers' },
-    { icon: BadgePercent, title: 'Fresh deals', description: 'Limited offers updated daily' },
+    { icon: Truck, title: 'Entrega rápida', description: 'Llega en promedio en menos de 30 min' },
+    { icon: ShieldCheck, title: 'Cocinas confiables', description: 'Calificadas con 4.6+ por clientes reales' },
+    { icon: BadgePercent, title: 'Promociones frescas', description: 'Ofertas limitadas actualizadas cada día' },
   ];
 
   const featuredItems = visibleItems.slice(0, 2);
@@ -48,8 +48,8 @@ export default function Home() {
       <div className="relative p-page pt-12">
         <div className="flex items-center justify-between mb-5">
           <div>
-            <p className="text-body-md text-on-surface-variant mb-1">Good Morning 👋</p>
-            <h1 className="text-headline-md text-on-surface mb-1">What would you like to eat?</h1>
+            <p className="text-body-md text-on-surface-variant mb-1">Buenos días 👋</p>
+            <h1 className="text-headline-md text-on-surface mb-1">¿Qué te gustaría pedir hoy?</h1>
           </div>
           <button
             type="button"
@@ -57,7 +57,7 @@ export default function Home() {
             className="relative w-12 h-12 rounded-full bg-white shadow-[0_6px_18px_rgba(0,0,0,0.08)] flex items-center justify-center text-on-surface"
           >
             <span className="text-sm font-bold">{cartCount}</span>
-            <span className="sr-only">Go to cart</span>
+            <span className="sr-only">Ir al carrito</span>
           </button>
         </div>
 
@@ -67,7 +67,7 @@ export default function Home() {
             <Search className="text-on-surface-variant mr-2" size={20} />
             <input 
               type="text" 
-              placeholder="Search for food..." 
+              placeholder="Buscar comida..." 
               className="bg-transparent border-none outline-none flex-1 text-body-md"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
@@ -90,11 +90,11 @@ export default function Home() {
             <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-white/10 blur-2xl" />
             <div className="relative z-10 flex items-start justify-between gap-4">
               <div className="max-w-[65%]">
-                <p className="text-xs uppercase tracking-[0.24em] text-white/70 mb-2">Today&apos;s offer</p>
-                <h2 className="text-headline-sm mb-2 text-white">Free delivery on selected meals</h2>
-                <p className="text-body-sm text-white/80 mb-4">Save time with quick delivery and curated dishes near you.</p>
+                <p className="text-xs uppercase tracking-[0.24em] text-white/70 mb-2">Oferta del día</p>
+                <h2 className="text-headline-sm mb-2 text-white">Entrega gratis en platos seleccionados</h2>
+                <p className="text-body-sm text-white/80 mb-4">Ahorra tiempo con entrega rápida y platos curados cerca de ti.</p>
                 <button type="button" className="bg-white text-on-surface px-4 py-3 rounded-full font-headline font-semibold shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
-                  Explore deals
+                  Ver promociones
                 </button>
               </div>
               <div className="w-24 h-24 rounded-[28px] bg-white/10 border border-white/15 flex items-center justify-center backdrop-blur-sm">
@@ -122,8 +122,8 @@ export default function Home() {
 
         {/* Categories */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-headline-sm">Categories</h2>
-          <span className="text-xs text-on-surface-variant">{allCategories.length} options</span>
+          <h2 className="text-headline-sm">Categorías</h2>
+          <span className="text-xs text-on-surface-variant">{allCategories.length} opciones</span>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-page px-page scrollbar-hide mb-section">
           {allCategories.map((cat) => {
@@ -146,7 +146,7 @@ export default function Home() {
 
         {/* Popular Food */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-headline-sm">Popular Now</h2>
+          <h2 className="text-headline-sm">Más populares</h2>
           <button
             type="button"
             onClick={() => {
@@ -155,14 +155,14 @@ export default function Home() {
             }}
             className="text-primary text-sm font-medium font-headline"
           >
-            See All
+            Ver todo
           </button>
         </div>
 
         <section className="mb-section">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-headline-sm">Featured picks</h2>
-            <span className="text-xs text-on-surface-variant">Handpicked for today</span>
+            <h2 className="text-headline-sm">Destacados</h2>
+            <span className="text-xs text-on-surface-variant">Seleccionados para hoy</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {featuredItems.map((item) => (
@@ -174,10 +174,10 @@ export default function Home() {
               >
                 <img src={item.image} alt={item.name} className="w-full h-28 rounded-2xl object-cover mb-3" />
                 <h3 className="font-headline font-semibold text-sm text-on-surface mb-1 line-clamp-2">{item.name}</h3>
-                <p className="text-[11px] text-on-surface-variant mb-2 line-clamp-1">{item.deliveryTime} delivery</p>
+                <p className="text-[11px] text-on-surface-variant mb-2 line-clamp-1">Entrega en {item.deliveryTime}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-primary font-bold text-sm">${item.price.toFixed(2)}</span>
-                  <span className="text-[11px] px-2 py-1 rounded-full bg-surface-container-low text-on-surface-variant">Top rated</span>
+                  <span className="text-[11px] px-2 py-1 rounded-full bg-surface-container-low text-on-surface-variant">Muy valorado</span>
                 </div>
               </button>
             ))}
@@ -187,8 +187,8 @@ export default function Home() {
         <div className="flex flex-col gap-grid">
           {visibleItems.length === 0 ? (
             <div className="bg-white rounded-3xl p-6 text-center shadow-[0_4px_16px_rgba(0,0,0,0.03)]">
-              <p className="font-headline font-semibold text-on-surface mb-2">No matches found</p>
-              <p className="text-body-sm text-on-surface-variant mb-4">Try a different search or category.</p>
+              <p className="font-headline font-semibold text-on-surface mb-2">No encontramos resultados</p>
+              <p className="text-body-sm text-on-surface-variant mb-4">Prueba otra búsqueda o categoría.</p>
               <button
                 type="button"
                 onClick={() => {
@@ -197,7 +197,7 @@ export default function Home() {
                 }}
                 className="bg-primary text-white px-5 py-3 rounded-full font-headline font-semibold"
               >
-                Reset filters
+                Reiniciar filtros
               </button>
             </div>
           ) : visibleItems.map(item => (
@@ -223,7 +223,7 @@ export default function Home() {
                     toggleFavorite(item.id);
                   }}
                   className={`absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center shadow-sm ${isFavorite(item.id) ? 'bg-primary text-white' : 'bg-white text-on-surface'}`}
-                  aria-label={`Toggle favorite for ${item.name}`}
+                  aria-label={`Marcar ${item.name} como favorito`}
                 >
                   <Heart size={14} className={isFavorite(item.id) ? 'fill-white' : ''} />
                 </button>
@@ -240,10 +240,10 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-on-surface-variant mb-2">
                   <span className="px-2 py-1 rounded-full bg-surface-container-low">{item.deliveryTime}</span>
-                  <span className="px-2 py-1 rounded-full bg-surface-container-low">{item.reviews} reviews</span>
+                  <span className="px-2 py-1 rounded-full bg-surface-container-low">{item.reviews} reseñas</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-on-surface-variant">Tap for details</span>
+                  <span className="text-xs text-on-surface-variant">Toca para ver detalles</span>
                   <button
                     type="button"
                     onClick={(event) => {
@@ -252,7 +252,7 @@ export default function Home() {
                       navigate('/cart');
                     }}
                     className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shadow-[0_8px_16px_-4px_rgba(233,94,80,0.35)]"
-                    aria-label={`Add ${item.name} to cart`}
+                    aria-label={`Agregar ${item.name} al carrito`}
                   >
                     <Plus size={16} />
                   </button>

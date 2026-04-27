@@ -9,16 +9,16 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const { addToCart, toggleFavorite, isFavorite } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState('Medium');
+  const [selectedSize, setSelectedSize] = useState('Mediano');
   
   const product = foodItems.find(item => item.id === id);
 
-  if (!product) return <div>Product not found</div>;
+  if (!product) return <div>Producto no encontrado</div>;
 
   const sizeOptions = [
-    { label: 'Small', multiplier: 0.9 },
-    { label: 'Medium', multiplier: 1 },
-    { label: 'Large', multiplier: 1.15 },
+    { label: 'Pequeño', multiplier: 0.9 },
+    { label: 'Mediano', multiplier: 1 },
+    { label: 'Grande', multiplier: 1.15 },
   ];
 
   const activeSize = sizeOptions.find(option => option.label === selectedSize) ?? sizeOptions[1];
@@ -44,7 +44,7 @@ export default function ProductDetails() {
           type="button"
           onClick={() => toggleFavorite(product.id)}
           className={`absolute top-12 right-page p-3 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.08)] ${isFavorite(product.id) ? 'bg-primary text-white' : 'bg-white/90 text-on-surface'}`}
-          aria-label={`Toggle favorite for ${product.name}`}
+          aria-label={`Marcar ${product.name} como favorito`}
         >
           <Heart size={24} className={isFavorite(product.id) ? 'fill-white' : ''} />
         </button>
@@ -73,7 +73,7 @@ export default function ProductDetails() {
           </p>
 
           <div className="mb-6">
-            <p className="text-sm font-semibold text-on-surface-variant mb-3">Size</p>
+            <p className="text-sm font-semibold text-on-surface-variant mb-3">Tamaño</p>
             <div className="flex gap-2">
               {sizeOptions.map((size) => {
                 const isActive = selectedSize === size.label;
@@ -94,7 +94,7 @@ export default function ProductDetails() {
 
           <div className="flex items-center justify-between mt-auto">
             <div>
-              <span className="text-sm font-semibold text-on-surface-variant block mb-1">Price</span>
+              <span className="text-sm font-semibold text-on-surface-variant block mb-1">Precio</span>
               <span className="text-headline-lg font-bold text-primary">${adjustedPrice.toFixed(2)}</span>
             </div>
             
@@ -124,7 +124,7 @@ export default function ProductDetails() {
           onClick={handleAddToCart}
           className="w-full bg-primary text-white py-4 rounded-full font-headline font-semibold text-lg shadow-[0_8px_16px_-4px_rgba(233,94,80,0.4)] transition-transform active:scale-[0.98]"
         >
-          Add to Cart - ${(adjustedPrice * quantity).toFixed(2)}
+          Agregar al carrito - ${(adjustedPrice * quantity).toFixed(2)}
         </button>
       </div>
     </div>

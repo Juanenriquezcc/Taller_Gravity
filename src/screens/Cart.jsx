@@ -30,7 +30,7 @@ export default function Cart() {
         <button onClick={() => navigate(-1)} className="p-2 -ml-2 rounded-full bg-white shadow-sm">
           <ChevronLeft size={24} />
         </button>
-        <h1 className="text-headline-md font-bold">My Cart</h1>
+        <h1 className="text-headline-md font-bold">Mi carrito</h1>
         <div className="w-10"></div> {/* Spacer for centering */}
       </div>
 
@@ -38,9 +38,9 @@ export default function Cart() {
       <div className="px-page flex flex-col gap-4 mb-section">
         {cartItems.length === 0 ? (
           <div className="bg-white rounded-3xl p-8 text-center text-on-surface-variant shadow-[0_8px_24px_rgba(0,0,0,0.04)]">
-            <p className="font-headline font-semibold text-on-surface mb-2">Your cart is empty.</p>
-            <p className="text-body-sm mb-4">Add items from the menu to continue with checkout.</p>
-            <button onClick={() => navigate('/home')} className="mt-2 bg-primary text-white px-5 py-3 rounded-full font-headline font-semibold">Go back to menu</button>
+            <p className="font-headline font-semibold text-on-surface mb-2">Tu carrito está vacío.</p>
+            <p className="text-body-sm mb-4">Agrega productos del menú para continuar con el pago.</p>
+            <button onClick={() => navigate('/home')} className="mt-2 bg-primary text-white px-5 py-3 rounded-full font-headline font-semibold">Volver al menú</button>
           </div>
         ) : (
           cartItems.map(item => (
@@ -51,7 +51,7 @@ export default function Cart() {
                 <span className="font-headline font-bold text-primary block mb-2">${item.price.toFixed(2)}</span>
                 {item.selectedSize && (
                   <span className="inline-flex items-center px-2 py-1 rounded-full bg-surface-container-low text-xs font-medium text-on-surface-variant mb-2">
-                    Size: {item.selectedSize}
+                    Tamaño: {item.selectedSize}
                   </span>
                 )}
                 
@@ -76,7 +76,7 @@ export default function Cart() {
                     onClick={() => removeFromCart(item.id)}
                     className="text-xs font-semibold text-error"
                   >
-                    Remove
+                    Quitar
                   </button>
                 </div>
               </div>
@@ -89,13 +89,13 @@ export default function Cart() {
       {cartItems.length > 0 && (
         <div className="px-page">
           <div className="bg-white rounded-3xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.04)]">
-            <h3 className="font-headline font-bold mb-4">Order Summary</h3>
+            <h3 className="font-headline font-bold mb-4">Resumen del pedido</h3>
             <div className="flex justify-between mb-3 text-on-surface-variant">
               <span>Subtotal</span>
               <span className="text-on-surface font-medium">${cartTotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-4 text-on-surface-variant">
-              <span>Delivery Fee</span>
+              <span>Costo de entrega</span>
               <span className="text-on-surface font-medium">${deliveryFee.toFixed(2)}</span>
             </div>
             <div className="border-t border-surface-variant pt-4 flex justify-between">
@@ -114,7 +114,7 @@ export default function Cart() {
             onClick={() => setIsCheckoutOpen(true)}
             className="w-full bg-primary text-white py-4 rounded-full font-headline font-semibold text-lg shadow-[0_8px_16px_-4px_rgba(233,94,80,0.4)] transition-transform active:scale-[0.98]"
           >
-            Checkout
+            Ir al pago
           </button>
         </div>
       )}
@@ -122,23 +122,23 @@ export default function Cart() {
       {isCheckoutOpen && cartItems.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/35 px-page flex items-end justify-center">
           <div className="w-full max-w-md bg-white rounded-t-[32px] p-6 shadow-[0_-16px_40px_rgba(0,0,0,0.12)]">
-            <p className="text-sm font-semibold text-on-surface-variant mb-2">Confirm order</p>
-            <h2 className="text-headline-md font-bold text-on-surface mb-3">Place this delivery now?</h2>
-            <p className="text-body-sm text-on-surface-variant mb-6">Your cart will be cleared and the order will be stored in your profile history.</p>
+            <p className="text-sm font-semibold text-on-surface-variant mb-2">Confirmar pedido</p>
+            <h2 className="text-headline-md font-bold text-on-surface mb-3">¿Deseas finalizar este envío ahora?</h2>
+            <p className="text-body-sm text-on-surface-variant mb-6">Tu carrito se vaciará y el pedido se guardará en tu historial del perfil.</p>
             <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setIsCheckoutOpen(false)}
                 className="flex-1 py-3 rounded-full bg-surface-container-low font-headline font-semibold"
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="button"
                 onClick={handleCheckout}
                 className="flex-1 py-3 rounded-full bg-primary text-white font-headline font-semibold"
               >
-                Confirm
+                Confirmar
               </button>
             </div>
           </div>
@@ -148,8 +148,8 @@ export default function Cart() {
       {lastOrder && cartItems.length === 0 && (
         <div className="fixed inset-x-0 top-24 px-page z-40">
           <div className="max-w-md mx-auto bg-white rounded-3xl p-4 shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-primary/10">
-            <p className="font-headline font-bold text-on-surface mb-1">Order confirmed</p>
-            <p className="text-body-sm text-on-surface-variant">We placed your order successfully. Total: ${lastOrder.total.toFixed(2)}.</p>
+            <p className="font-headline font-bold text-on-surface mb-1">Pedido confirmado</p>
+            <p className="text-body-sm text-on-surface-variant">Tu pedido fue realizado correctamente. Total: ${lastOrder.total.toFixed(2)}.</p>
           </div>
         </div>
       )}
