@@ -24,8 +24,10 @@ export default function BottomNav() {
           <button
             key={item.path}
             onClick={() => navigate(item.path)}
-            className={`relative flex flex-col items-center p-2 transition-all ${
-              isActive ? 'text-primary' : 'text-on-surface-variant'
+            aria-label={item.label}
+            aria-current={isActive ? 'page' : undefined}
+            className={`relative flex flex-col items-center p-2 transition-all duration-200 rounded-2xl ${
+              isActive ? 'text-primary bg-primary/5' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
             }`}
           >
             <div className={`p-2 rounded-full transition-all ${isActive ? 'bg-primary/10' : ''}`}>
@@ -36,7 +38,7 @@ export default function BottomNav() {
                 </div>
               )}
             </div>
-            <span className={`text-[10px] font-medium mt-1 ${isActive ? 'opacity-100' : 'opacity-0 h-0'}`}>
+            <span className={`text-[10px] font-medium mt-1 transition-all ${isActive ? 'opacity-100' : 'opacity-70'}`}>
               {item.label}
             </span>
           </button>

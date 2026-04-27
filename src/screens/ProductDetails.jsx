@@ -1,40 +1,58 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Star, Clock, Minus, Plus } from 'lucide-react';
+import { ChevronLeft, Star, Clock, Minus, Plus, Heart } from 'lucide-react';
 import { foodItems } from '../data/mockData';
 import { useCart } from '../context/CartContext';
 
 export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { addToCart, toggleFavorite, isFavorite } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState('Medium');
   
   const product = foodItems.find(item => item.id === id);
 
   if (!product) return <div>Product not found</div>;
 
+  const sizeOptions = [
+    { label: 'Small', multiplier: 0.9 },
+    { label: 'Medium', multiplier: 1 },
+    { label: 'Large', multiplier: 1.15 },
+  ];
+
+  const activeSize = sizeOptions.find(option => option.label === selectedSize) ?? sizeOptions[1];
+  const adjustedPrice = product.price * activeSize.multiplier;
+
   const handleAddToCart = () => {
-    addToCart(product, quantity);
+    addToCart({ ...product, price: adjustedPrice, selectedSize }, quantity);
     navigate('/cart');
   };
 
   return (
-    <div className="min-h-screen bg-background pb-32">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#f8e0dc_0%,#fcf7f6_24%,#fbf9f9_52%,#f7f4f3_100%)] pb-32">
       {/* Hero Image */}
       <div className="relative h-72 rounded-b-[40px] overflow-hidden shadow-sm">
         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
         <button 
           onClick={() => navigate(-1)}
-          className="absolute top-12 left-page bg-white/20 backdrop-blur-md p-3 rounded-full text-white"
+          className="absolute top-12 left-page bg-white/90 backdrop-blur-md p-3 rounded-full text-on-surface shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
         >
           <ChevronLeft size={24} />
+        </button>
+        <button
+          type="button"
+          onClick={() => toggleFavorite(product.id)}
+          className={`absolute top-12 right-page p-3 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.08)] ${isFavorite(product.id) ? 'bg-primary text-white' : 'bg-white/90 text-on-surface'}`}
+          aria-label={`Toggle favorite for ${product.name}`}
+        >
+          <Heart size={24} className={isFavorite(product.id) ? 'fill-white' : ''} />
         </button>
       </div>
 
       {/* Content */}
       <div className="p-page -mt-6 relative z-10">
-        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
+        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.06)] border border-white/70">
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-headline-md text-on-surface font-bold leading-tight max-w-[75%]">{product.name}</h1>
             <div className="flex items-center gap-1 bg-primary/10 px-2 py-1 rounded-lg text-primary font-bold text-sm">
@@ -54,8 +72,31 @@ export default function ProductDetails() {
             {product.description}
           </p>
 
+          <div className="mb-6">
+            <p className="text-sm font-semibold text-on-surface-variant mb-3">Size</p>
+            <div className="flex gap-2">
+              {sizeOptions.map((size) => {
+                const isActive = selectedSize === size.label;
+
+                return (
+                  <button
+                    key={size.label}
+                    type="button"
+                    onClick={() => setSelectedSize(size.label)}
+                    className={`flex-1 py-3 rounded-full font-headline font-semibold transition-colors ${isActive ? 'bg-primary text-white shadow-[0_8px_16px_-4px_rgba(233,94,80,0.32)]' : 'bg-surface-container-low text-on-surface'}`}
+                  >
+                    {size.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="flex items-center justify-between mt-auto">
-            <span className="text-headline-lg font-bold text-primary">${product.price.toFixed(2)}</span>
+            <div>
+              <span className="text-sm font-semibold text-on-surface-variant block mb-1">Price</span>
+              <span className="text-headline-lg font-bold text-primary">${adjustedPrice.toFixed(2)}</span>
+            </div>
             
             {/* Quantity Selector */}
             <div className="flex items-center bg-surface-container rounded-full p-1">
@@ -83,7 +124,7 @@ export default function ProductDetails() {
           onClick={handleAddToCart}
           className="w-full bg-primary text-white py-4 rounded-full font-headline font-semibold text-lg shadow-[0_8px_16px_-4px_rgba(233,94,80,0.4)] transition-transform active:scale-[0.98]"
         >
-          Add to Cart - ${(product.price * quantity).toFixed(2)}
+          Add to Cart - ${(adjustedPrice * quantity).toFixed(2)}
         </button>
       </div>
     </div>
